@@ -5,6 +5,7 @@ import 'package:clean_architecture_tdd_app/features/number_trivia/data/datasourc
 import 'package:clean_architecture_tdd_app/features/number_trivia/data/models/number_trivia_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:matcher/matcher.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../fixtures/fixture_reader.dart';
@@ -29,7 +30,7 @@ void main() {
         'should return NumberTrivia from SharedPreferences when there is one in the cache',
         () async {
       // arrange
-      when(() => mockSharedPreferences.getString('any'))
+      when(() => mockSharedPreferences.getString(any()))
           .thenReturn(fixture('trivia_cached.json'));
       // act
       final result = await dataSource.getLastNumberTrivia();
@@ -40,14 +41,14 @@ void main() {
 
     test('should throw a CacheException when there is not a cached value', () {
       // arrange
-      when(() => mockSharedPreferences.getString('any')).thenReturn(null);
+      when(() => mockSharedPreferences.getString(any())).thenReturn(null);
       // act
       // Not calling the method here, just storing it inside a call variable
       final call = dataSource.getLastNumberTrivia;
       // assert
       // Calling the method happens from a higher-order function passed.
       // This is needed to test if calling a method throws an exception.
-      expect(() => call(), throwsA(TypeMatcher<CacheException>()));
+      expect(() => call(), throwsA(isA<CacheException>()));
     });
   });
 
