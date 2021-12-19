@@ -33,14 +33,14 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     on<GetTriviaForConcreteNumber>((event, emit) async {
       final inputEither =
           inputConverter.stringToUnsignedInteger(event.numberString);
-      inputEither.fold((failure) {
+      await inputEither.fold((failure) {
         emit(Error(message: INVALID_INPUT_FAILURE_MESSAGE));
       }, (integer) async {
         emit(Loading());
 
         final failureOrTrivia =
             await getConcreteNumberTrivia(Params(number: integer));
-        failureOrTrivia!.fold((failure) {
+        failureOrTrivia.fold((failure) {
           emit(Error(message: _mapFailureToMessage(failure)));
         }, (trivia) {
           emit(Loaded(trivia: trivia));
@@ -50,7 +50,7 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     on<GetTriviaForRandomNumber>((event, emit) async {
       emit(Loading());
       final failureOrTrivia = await getRandomNumberTrivia(NoParams());
-      failureOrTrivia!.fold((failure) {
+      failureOrTrivia.fold((failure) {
         emit(Error(message: _mapFailureToMessage(failure)));
       }, (trivia) {
         emit(Loaded(trivia: trivia));
