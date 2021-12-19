@@ -57,6 +57,10 @@ void main() {
         NumberTriviaModel(number: 1, text: 'test trivia');
 
     test('should call SharedPreferences to cache the data', () {
+      // Related to: https://github.com/felangel/mocktail/issues/78
+      when(() => dataSource.cacheNumberTrivia(tNumberTriviaModel))
+          .thenAnswer((_) async => true);
+
       // act
       dataSource.cacheNumberTrivia(tNumberTriviaModel);
       // assert

@@ -12,6 +12,8 @@ import '../../../../fixtures/fixture_reader.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 
+class UriFake extends Fake implements Uri {}
+
 void main() {
   late NumberTriviaRemoteDataSourceImpl dataSource;
   late MockHttpClient mockHttpClient;
@@ -21,14 +23,21 @@ void main() {
     dataSource = NumberTriviaRemoteDataSourceImpl(client: mockHttpClient);
   });
 
+  setUpAll(() {
+    registerFallbackValue<Uri>(
+        UriFake()); /* create a dummy instance of `Uri` */
+  });
+
   void setUpMockHttpClientSuccess200() {
-    when(() => mockHttpClient.get(any(), headers: any())).thenAnswer(
+    when(() => mockHttpClient.get(any(), headers: any(named: 'headers')))
+        .thenAnswer(
       (_) async => http.Response(fixture('trivia.json'), 200),
     );
   }
 
   void setUpMockHttpClientFailure404() {
-    when(() => mockHttpClient.get(any(), headers: any())).thenAnswer(
+    when(() => mockHttpClient.get(any(), headers: any(named: 'headers')))
+        .thenAnswer(
       (_) async => http.Response('Something went wrong', 404),
     );
   }
