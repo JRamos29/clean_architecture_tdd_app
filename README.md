@@ -6,18 +6,18 @@
 #
 
 ### This is a small and simple app of Number Trivia, using the concepts of <b>[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)</b> using [Flutter BLoC](https://pub.dev/packages/flutter_bloc) for state management and Flutter 2.0 (null-safety).
-<br> 
 
+#
 
 <h3 align="center">Clean Architecture Proposal</h3>
-
 <br />
 
-<img src="./assets/images/Clean-Architecture-Flutter-Diagram.png" style="display: block; margin-left: auto; margin-right: auto; width: 75%;"/>
+<img src="./assets/images/Clean-Architecture-Flutter-Diagram.png" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
 
+#
 
 The app was developed following the tutorial series  available at [this link](https://resocoder.com/flutter-clean-architecture-tdd/) with some packages changes, and using Flutter 2.0 (null-safety):
-<p> 
+
 
 - Service locator (Dependency Injection) using [get_it](https://pub.dev/packages/get_it);
 - Check object value equality with [equatable](https://pub.dev/packages/equatable);
