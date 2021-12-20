@@ -11,8 +11,9 @@
 
 <h3 align="center">Clean Architecture Proposal</h3>
 <br />
-
+<p align="center">
 <img src="./assets/images/Clean-Architecture-Flutter-Diagram.png" style="display: block; margin-left: auto; margin-right: auto; width: 70%;"/>
+</p>
 
 #
 
